@@ -13,4 +13,8 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 
+if (firebaseConfig.authDomain) {
+  auth.tenantId = firebaseConfig.authDomain;
+}
+
 export { app, auth };
