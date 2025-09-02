@@ -41,7 +41,7 @@ const getReviewsFromGoogle = async (businessProfileId: string) => {
 
   // In a real application, you would replace this with the actual Google Business Profile API endpoint.
   // This example uses a public API that returns placeholder user data.
-  const response = await fetch(`https://jsonplaceholder.typicode.com/comments`);
+  const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=1`);
   if (!response.ok) {
     throw new Error('Failed to fetch reviews');
   }
@@ -53,9 +53,9 @@ const getReviewsFromGoogle = async (businessProfileId: string) => {
       name: item.name,
       avatar: `https://picsum.photos/40/40?random=${index + 1}`,
     },
-    rating: Math.floor(Math.random() * 3) + 3, // Random rating between 3 and 5
+    rating: item.id % 5 + 1, // Use a deterministic rating based on API data
     content: item.body,
-    createdAt: new Date(Date.now() - Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 30)).toISOString(),
+    createdAt: new Date(Date.now() - (index * 1000 * 60 * 60 * 24 * 3)).toISOString(), // Consistent date
   }));
 
   return { reviews };
