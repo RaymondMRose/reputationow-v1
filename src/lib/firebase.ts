@@ -8,13 +8,15 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  tenantId: process.env.NEXT_PUBLIC_FIREBASE_TENANT_ID,
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 
-if (firebaseConfig.authDomain) {
-  auth.tenantId = firebaseConfig.authDomain;
-}
+/* if (firebaseConfig.authDomain) {
+  auth.tenantId = firebaseConfig.tenantId;
+} */
 
 export { app, auth };
