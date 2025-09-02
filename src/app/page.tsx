@@ -18,7 +18,8 @@ export default function Home() {
 
   useEffect(() => {
     const loadReviews = async () => {
-      if (!process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_ID) {
+      const businessId = process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_ID;
+      if (!businessId) {
         console.error('Google Business ID is not set in environment variables.');
         setReviewsLoading(false);
         return;
@@ -26,7 +27,7 @@ export default function Home() {
       try {
         setReviewsLoading(true);
         const remoteReviews = await fetchGoogleReviews({
-          businessProfileId: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_ID,
+          businessProfileId: businessId,
         });
 
         const formattedReviews: Review[] = remoteReviews.reviews.map((r, index) => ({
