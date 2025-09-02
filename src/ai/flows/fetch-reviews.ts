@@ -38,15 +38,15 @@ export async function fetchGoogleReviews(input: FetchGoogleReviewsInput): Promis
 // This function now fetches live data from a reviews API.
 const getReviewsFromGoogle = async (businessProfileId: string) => {
   console.log(`Fetching live reviews for business ID: ${businessProfileId}`);
-  
+
   // In a real application, you would replace this with the actual Google Business Profile API endpoint.
   // This example uses a public API that returns placeholder user data.
-  const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=1`);
+  const response = await fetch(`https://jsonplaceholder.typicode.com/comments`);
   if (!response.ok) {
     throw new Error('Failed to fetch reviews');
   }
   const data = await response.json();
-
+  
   // Map the API response to the expected Review format.
   const reviews = data.map((item: any, index: number) => ({
     author: {
